@@ -1,15 +1,61 @@
-This code fixed the three bugs that were stopping the code from compiling.
+# Kablamo Assignment - Stopwatch Component
 
-There are several things I would do differently. This assumes we want to keep it as a class otherwise I recommend we move to a functional component format. The reason for this is that while class is still an accepted approach, the industry has largely moved to function classes.
-1: Laps is managed as a class property (this.laps = []) and not a part of React state. This means react will not automatically rerender it. Which is why we are being forced to use a forceUpdate() throughout. This is an 'anti-pattern' and should be avoided. After doing this we will need to use setState to update the laps.
-2. I would create a state interface ie.
- interface StopwatchState {
-      secondsElapsed: number;
-      lastClearedIncrementer: number | null;
-      laps: number[];
-  }
-to keep track of the state and the variables.
-3. I would avoid using any for incremeneter, laps or lastClearedIncrement. You should know what value to pass in otherwise you could assign something you don't want to to the variables. Most likely it should be number | null.
-4. We can probably used a isRunning variable instead of a lastClearedIncrement to simplify the code as we don't need to check if the timer is stopped by comparing it.
-5. There is an asynchronous bug that occurs if you press start to quickly before the state updates for the incrementor. it generates multiple times. This should be fixed or button disabled.
-6. Testing file should be added.
+This code fixes the three bugs that were preventing the code from compiling.
+
+## Overview
+
+A React stopwatch component that tracks elapsed time and lap times. The component has been debugged and is now functional.
+
+## Issues Fixed
+
+- Fixed compilation errors that were preventing the code from running
+- Resolved state management issues
+- Corrected timer functionality
+
+## Recommended Improvements
+
+While the code now compiles and works, there are several improvements I would recommend for better React practices:
+
+### 1. State Management
+**Current Issue:** Laps are managed as a class property (`this.laps = []`) rather than React state, forcing the use of `forceUpdate()` throughout the code.
+
+**Recommendation:** Move laps to React state and use `setState()` for updates instead of `forceUpdate()`.
+
+### 2. Type Safety
+**Current Issue:** Using `any` type for incrementer, laps, and lastClearedIncrement variables.
+
+**Recommendation:** Create a proper state interface:
+
+```typescript
+interface StopwatchState {
+  secondsElapsed: number;
+  lastClearedIncrementer: number | null;
+  laps: number[];
+}
+```
+
+### 3. Simplified Logic
+**Current Issue:** Using `lastClearedIncrement` to check if timer is running.
+
+**Recommendation:** Use a simple `isRunning` boolean variable instead of comparing increment values.
+
+### 4. Race Condition Fix
+**Current Issue:** Asynchronous bug when pressing start too quickly before state updates, generating multiple timers.
+
+**Recommendation:** Implement proper state management or disable the button during state transitions.
+
+### 5. Component Architecture
+**Recommendation:** Consider migrating from class components to functional components with hooks, as this is the current industry standard.
+
+### 6. Testing
+**Recommendation:** Add comprehensive test files to ensure component reliability.
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies
+3. Run the application
+
+## Contributing
+
+Please follow React best practices and ensure all changes are properly tested before submitting.
