@@ -9,12 +9,10 @@ A React stopwatch component that tracks elapsed time and lap times. The componen
 ## Issues Fixed
 
 - Fixed compilation errors that were preventing the code from running
-- Resolved state management issues
-- Corrected timer functionality
 
 ## Recommended Improvements
 
-While the code now compiles and works, there are several improvements I would recommend for better React practices:
+There are several things I would do differently. This assumes we want to keep it as a class otherwise I recommend we move to a functional component format. The reason for this is that while class is still an accepted approach, the industry has largely moved to function classes.
 
 ### 1. State Management
 **Current Issue:** Laps are managed as a class property (`this.laps = []`) rather than React state, forcing the use of `forceUpdate()` throughout the code.
@@ -55,7 +53,3 @@ interface StopwatchState {
 1. Clone the repository
 2. Install dependencies
 3. Run the application
-
-## Contributing
-
-Please follow React best practices and ensure all changes are properly tested before submitting.
